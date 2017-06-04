@@ -15,4 +15,6 @@ typedef int sched_err;
 
 #define SCHED_ERR_OK(s)(s == SCHED_OK)
 
+char* sched_err_str(sched_err const);
+
 #endif

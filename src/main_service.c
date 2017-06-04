@@ -10,6 +10,12 @@ int main(int const argc, char const * const * const argv)
 	sched_conf cfg;
 	sched_err status;
 
+	if ((status = sched_sys_check()) != SCHED_OK)
+	{
+		sched_log_errnl("sched_sys_check failed: %s", sched_err_str(status));
+		exit(1);
+	}
+
 	sched_log_infonl_args(argc, argv);
 
 	if (argc != 2)
@@ -28,5 +34,6 @@ int main(int const argc, char const * const * const argv)
 	if (SCHED_ERR_OK(status))
 		return 0;
 
+	sched_log_errnl("service error: %s", sched_err_str(status));
 	return status;
 }
