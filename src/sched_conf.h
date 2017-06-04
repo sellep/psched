@@ -14,7 +14,7 @@ typedef int sched_conf_entry_type;
 typedef struct
 {
 	char *cnam;
-	entry_type etyp;
+	entry_type type;
 	char *dep_on;
 } sched_conf_entry;
 
@@ -42,8 +42,8 @@ typedef struct
 	sched_conf_hygr hygr;
 } sched_conf;
 
-#define SCHED_CONF_ENTRY_ISTEMP(x)()
-#define SCHED_CONF_ENTRY_ISCLOCK(x)()
+#define SCHED_CONF_ENTRY_ISTEMP(e)(e->type == TEMP)
+#define SCHED_CONF_ENTRY_ISCLOCK(e)(e->type == CLOCK)
 
 sched_err sched_conf_read(sched_conf * const, char const * const);
 

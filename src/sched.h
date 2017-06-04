@@ -17,4 +17,6 @@ typedef int sched_err;
 
 char* sched_err_str(sched_err const);
 
+sched_err sched_sys_check();
+
 #endif
