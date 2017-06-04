@@ -1,29 +1,50 @@
 #ifndef __P_SCHED_CONF_H
 #define __P_SCHED_CONF_H
 
-enum sched_entry_type {
+#include "sched.h"
+
+enum sched_conf_entry_types
+{
 	TEMP,
 	CLOCK
 };
 
-typedef struct {
+typedef int sched_conf_entry_type;
+
+typedef struct
+{
 	char *cnam;
 	entry_type etyp;
-} sched_entry;
+	char *dep_on;
+} sched_conf_entry;
 
-typedef struct {
-	sched_entry bas;
+typedef struct
+{
+	sched_conf_entry base;
 	double act;
 	double dea;
-} sched_entry_temp;
+} sched_conf_entry_temp;
 
-typedef struct {
-	sched_entry bas;
-} sched_entry_clock;
+typedef struct
+{
+	sched_conf_entry base;
+} sched_conf_entry_clock;
 
-#define SCHED_ENTRY_ISTEMP(x)()
-#define SCHED_ENTRY_ISCLOCK(x)()
+typedef struct
+{
+	ssize_t pol;
+} sched_hconf_ygr;
 
-int sched_entry_read(sched_entry * * const, char const * const);
+typedef struct
+{
+	sched_conf_entry *entrs;
+	ssize_t entrs_len;
+	sched_conf_hygr hygr;
+} sched_conf;
+
+#define SCHED_CONF_ENTRY_ISTEMP(x)()
+#define SCHED_CONF_ENTRY_ISCLOCK(x)()
+
+sched_err sched_conf_read(sched_conf * const, char const * const);
 
 #endif
